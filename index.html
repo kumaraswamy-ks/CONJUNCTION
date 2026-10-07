@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KS Learning Center – Conjunction: Complete English Grammar</title>
+<meta name="description" content="Offline interactive Conjunction learning portal with English + Kannada support, 1000+ practice questions, tests, flashcards and progress tracking.">
+<style>
+:root{--bg:#fbf7ef;--card:#fff;--ink:#1d2433;--mute:#5d6577;--pri:#0f5c4d;--pri2:#e08a1e;--ok:#1f8a4c;--bad:#c0392b;--line:#e6dfcf;--soft:#f1ebdd;--sh:0 4px 18px rgba(30,40,60,.08)}
+body.dark{--bg:#12161d;--card:#1b212b;--ink:#eef1f6;--mute:#9aa4b5;--pri:#3fbfa0;--pri2:#f2a33a;--line:#2c3542;--soft:#232b37;--sh:0 4px 18px rgba(0,0,0,.4)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:Georgia,"Noto Serif Kannada","Tunga",serif;background:var(--bg);color:var(--ink);line-height:1.6}
+button,input,select,textarea{font:inherit}
+header{background:var(--pri);color:#fff;padding:18px 16px 14px;text-align:center}
+header h1{margin:0;font-size:1.05rem;letter-spacing:.2em}header h2{margin:4px 0;font-size:1.5rem}
+header p{margin:2px 0;font-size:.85rem;opacity:.9}.flow{font-weight:bold;color:#ffd79a}
+nav{position:sticky;top:0;z-index:10;background:var(--card);border-bottom:1px solid var(--line);display:flex;gap:6px;overflow-x:auto;padding:8px;box-shadow:var(--sh)}
+nav button{white-space:nowrap;border:1px solid var(--line);background:var(--soft);color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer;font-size:.85rem}
+nav button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+main{max-width:980px;margin:auto;padding:16px}
+section{display:none}section.on{display:block;animation:f .3s}@keyframes f{from{opacity:0;transform:translateY(6px)}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0;box-shadow:var(--sh)}
+h3{color:var(--pri);margin:.2em 0 .5em}.kn{color:var(--pri2);font-size:.95em}body.nokn .kn{display:none}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.btn{background:var(--pri);color:#fff;border:0;padding:9px 16px;border-radius:10px;cursor:pointer;margin:4px 4px 4px 0}
+.btn.alt{background:var(--pri2)}.btn.ghost{background:transparent;color:var(--pri);border:1px solid var(--pri)}
+.btn:focus-visible,nav button:focus-visible,.opt:focus-visible{outline:3px solid var(--pri2);outline-offset:2px}
+table{width:100%;border-collapse:collapse;font-size:.92rem}td,th{border:1px solid var(--line);padding:7px;text-align:left;vertical-align:top}th{background:var(--soft)}
+.opt{display:block;width:100%;text-align:left;margin:6px 0;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--soft);color:var(--ink);cursor:pointer}
+.opt.ok{background:#d6f3e1;border-color:var(--ok);color:#0d3a20}.opt.bad{background:#f8d9d5;border-color:var(--bad);color:#4a120c}
+.fb{margin-top:8px;padding:10px;border-radius:10px;background:var(--soft)}
+.bar{height:10px;background:var(--soft);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--pri)}
+.stat{font-size:1.8rem;font-weight:bold;color:var(--pri)}
+.flash{min-height:170px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;font-size:1.3rem}
+.chip{display:inline-block;padding:3px 10px;margin:3px;border-radius:999px;background:var(--soft);border:1px solid var(--line);cursor:pointer}
+.speak{border:0;background:none;cursor:pointer;font-size:1rem}
+input[type=text],select,textarea{width:100%;padding:9px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+.tools{position:fixed;right:10px;bottom:10px;display:flex;flex-direction:column;gap:6px;z-index:20}
+.tools button{width:44px;height:44px;border-radius:50%;border:0;background:var(--pri2);color:#fff;cursor:pointer;box-shadow:var(--sh)}
+.hl{background:#ffe9a8;color:#222;padding:0 3px;border-radius:4px}
+footer{text-align:center;color:var(--mute);font-size:.8rem;padding:24px}
+#printArea{display:none}
+@media print{header,nav,.tools,footer,main{display:none!important}#printArea{display:block!important;color:#000;font-family:Georgia,serif}#printArea h2{text-align:center}.pq{margin:8px 0;page-break-inside:avoid}}
+</style>
+</head>
+<body>
+<header>
+<h1>KS LEARNING CENTER</h1>
+<h2>CONJUNCTION – COMPLETE ENGLISH GRAMMAR</h2>
+<p>Learn English • Understand Conjunctions • Practise Smart • Prepare for Exams</p>
+<p class="flow">Learn → Understand → Practise → Test → Revise → Master</p>
+</header>
+<nav id="nav" aria-label="Sections"></nav>
+<main id="main"></main>
+<div id="printArea"></div>
+<div class="tools">
+<button onclick="toggleDark()" title="Dark mode" aria-label="Toggle dark mode">◐</button>
+<button onclick="toggleKn()" title="Kannada on/off" aria-label="Toggle Kannada">ಕ</button>
+<button onclick="scrollTo(0,0)" title="Top" aria-label="Back to top">↑</button>
+</div>
+<footer>© KS Learning Center • Works fully offline • Progress saved in this browser</footer>
+
+<script>
+/* ================== DATA ================== */
+const $=s=>document.querySelector(s);
+const LS='ks_conj_v1';
+let P=JSON.parse(localStorage.getItem(LS)||'null')||{done:{},att:0,cor:0,mist:[],lessons:{},best:{},streak:0,last:'',daily:{},dark:false,kn:true,flash:{}};
+const save=()=>localStorage.setItem(LS,JSON.stringify(P));
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-IN';u.rate=.9;speechSynthesis.speak(u)}catch(e){alert('Speech not supported in this browser')}}
+const sp=t=>`<button class="speak" aria-label="Pronounce ${esc(t)}" onclick="say('${t.replace(/'/g,"\\'")}')">🔊</button>`;
+
+const BANK=[
+// word, type, category, meaning, kannada, example
+['and','Coordinating','Addition','joins similar ideas','ಮತ್ತು','Ravi and Sita are friends.'],
+['but','Coordinating','Contrast','shows opposite idea','ಆದರೆ','He is poor but honest.'],
+['or','Coordinating','Choice','gives an alternative','ಅಥವಾ','Tea or coffee?'],
+['nor','Coordinating','Negative choice','adds a negative idea','ಅಥವಾ ಇಲ್ಲ','He does not drink, nor does he smoke.'],
+['for','Coordinating','Reason','because (formal)','ಏಕೆಂದರೆ','She smiled, for she was happy.'],
+['yet','Coordinating','Contrast','but still','ಆದರೂ','It was late, yet he kept working.'],
+['so','Coordinating','Result','therefore','ಆದ್ದರಿಂದ','It rained, so we stayed home.'],
+['because','Subordinating','Reason','for the reason that','ಏಕೆಂದರೆ','I stayed home because I was ill.'],
+['since','Subordinating','Reason / Time','because / from the time','ಏಕೆಂದರೆ / ಅಂದಿನಿಂದ','Since you are here, help me.'],
+['as','Subordinating','Reason / Time','because / while','ಏಕೆಂದರೆ / ಆಗ','As it was cold, I wore a coat.'],
+['although','Subordinating','Contrast','in spite of the fact','ಆದರೂ ಕೂಡ','Although he is rich, he is unhappy.'],
+['though','Subordinating','Contrast','although','ಆದರೂ','Though tired, she finished.'],
+['even though','Subordinating','Contrast','strong although','ಹಾಗಿದ್ದರೂ','Even though it rained, we played.'],
+['while','Subordinating','Time / Contrast','during / whereas','ಆಗುತ್ತಿರುವಾಗ','I read while she cooked.'],
+['whereas','Subordinating','Contrast','in comparison','ಆದರೆ ಇನ್ನೊಂದೆಡೆ','He is tall, whereas his brother is short.'],
+['when','Subordinating','Time','at the time that','ಯಾವಾಗ','Call me when you arrive.'],
+['whenever','Subordinating','Time','every time','ಯಾವಾಗಲಾದರೂ','Visit us whenever you like.'],
+['before','Subordinating','Time','earlier than','ಮೊದಲು','Wash hands before you eat.'],
+['after','Subordinating','Time','later than','ನಂತರ','We left after the show ended.'],
+['until','Subordinating','Time','up to the time','ತನಕ','Wait until I come.'],
+['till','Subordinating','Time','until','ವರೆಗೆ','Stay here till I return.'],
+['as soon as','Subordinating','Time','immediately when','ತಕ್ಷಣ','Ring me as soon as you reach.'],
+['once','Subordinating','Time','after / when','ಒಮ್ಮೆ','Once you finish, rest.'],
+['if','Subordinating','Condition','on condition that','ಒಂದು ವೇಳೆ','If it rains, we will stay in.'],
+['unless','Subordinating','Condition','if not','ಹೊರತು','You will fail unless you study.'],
+['provided that','Subordinating','Condition','only if','ಎಂಬ ಷರತ್ತಿನ ಮೇಲೆ','You may go provided that you return early.'],
+['in case','Subordinating','Condition','as a precaution','ಒಂದು ವೇಳೆ ಆದರೆ','Take an umbrella in case it rains.'],
+['so that','Subordinating','Purpose','in order that','ಆಗಲೆಂದು','Speak loudly so that all can hear.'],
+['in order that','Subordinating','Purpose','so that (formal)','ಉದ್ದೇಶದಿಂದ','He saved money in order that he might travel.'],
+['lest','Subordinating','Purpose (negative)','for fear that','ಇಲ್ಲದಿದ್ದರೆ','Walk carefully lest you should fall.'],
+['than','Subordinating','Comparison','used in comparison','ಗಿಂತ','She is taller than I am.'],
+['where','Subordinating','Place','at the place','ಎಲ್ಲಿ','Sit where you like.'],
+['wherever','Subordinating','Place','any place','ಎಲ್ಲೆಲ್ಲಿ','Follow me wherever I go.'],
+['that','Subordinating','Statement','introduces a clause','ಎಂದು','I know that he is honest.'],
+['whether','Subordinating','Choice','if (two options)','ಆಗಲಿ ಅಥವಾ','I doubt whether he will come.'],
+['either…or','Correlative','Choice','one of two','ಇದು ಅಥವಾ ಅದು','Either you or he is right.'],
+['neither…nor','Correlative','Negative','not one nor the other','ಇದೂ ಅಲ್ಲ ಅದೂ ಅಲ್ಲ','Neither Ram nor Shyam came.'],
+['both…and','Correlative','Addition','the two together','ಎರಡೂ','Both Asha and Usha sing.'],
+['not only…but also','Correlative','Addition','emphatic addition','ಮಾತ್ರವಲ್ಲದೆ','He is not only smart but also kind.'],
+['whether…or','Correlative','Choice','in either case','ಆಗಲಿ…ಅಥವಾ','Whether you win or lose, play fair.'],
+['no sooner…than','Correlative','Time','immediately after','ಕೂಡಲೇ','No sooner had he arrived than it rained.'],
+['hardly…when','Correlative','Time','just as','ಅಷ್ಟರಲ್ಲೇ','Hardly had I slept when the phone rang.'],
+['scarcely…when','Correlative','Time','just as','ಅಷ್ಟರಲ್ಲೇ','Scarcely had we left when it began to rain.'],
+['such…that','Correlative','Result','so much that','ಎಷ್ಟು…ಎಂದರೆ','It was such a hot day that we stayed in.'],
+['so…that','Correlative','Result','to such degree that','ಎಷ್ಟು…ಎಂದರೆ','He was so tired that he slept early.'],
+['as…as','Correlative','Comparison','equal degree','ಅಷ್ಟೇ','She is as tall as her mother.'],
+['rather…than','Correlative','Preference','preferring','ಬದಲಾಗಿ','I would rather walk than drive.'],
+['however','Conjunctive adverb','Contrast','nevertheless','ಆದಾಗ್ಯೂ','It was costly; however, I bought it.'],
+['therefore','Conjunctive adverb','Result','for that reason','ಆದ್ದರಿಂದ','He worked hard; therefore, he passed.'],
+['moreover','Conjunctive adverb','Addition','besides','ಇದಲ್ಲದೆ','It is cheap; moreover, it is good.'],
+];
+
+// Question templates: [sentence with ___, answer, distractors, explanation, level]
+const NAMES=['Ravi','Sita','Anil','Meena','Kiran','Asha','Rahul','Divya','Arjun','Pooja','Manoj','Lakshmi','Vijay','Kavya','Suresh','Nisha','Deepak','Rekha','Ganesh','Shwetha'];
+const T=[
+['{N} was tired, ___ he kept working.','yet',['so','or','because'],'"yet" shows contrast: tired but still working.','B'],
+['{N} missed the bus ___ {N} woke up late.','because',['but','unless','so'],'"because" gives the reason.','B'],
+['It was raining, ___ {N} took an umbrella.','so',['but','or','although'],'"so" shows the result.','B'],
+['Would {N} like tea ___ coffee?','or',['and','but','so'],'"or" offers a choice.','B'],
+['{N} is poor ___ honest.','but',['and','so','or'],'"but" joins contrasting ideas.','B'],
+['{N} plays cricket ___ football.','and',['but','nor','yet'],'"and" adds similar ideas.','B'],
+['{N} does not eat meat, ___ does {N} eat eggs.','nor',['or','and','so'],'After a negative clause, "nor" adds another negative.','I'],
+['{N} will fail ___ {N} studies hard.','unless',['if','because','since'],'"unless" = if not.','I'],
+['___ it was cold, {N} went for a walk.','Although',['Because','Unless','So'],'"Although" shows contrast.','I'],
+['Wait here ___ {N} returns.','until',['unless','because','although'],'"until" = up to the time.','B'],
+['{N} saved money ___ {N} could buy a bicycle.','so that',['because','unless','although'],'"so that" shows purpose.','I'],
+['Call me ___ {N} reaches home.','as soon as',['unless','although','so'],'"as soon as" = immediately when.','I'],
+['{N} is taller ___ his brother.','than',['then','as','that'],'Use "than" for comparison.','B'],
+['___ {N} nor his friend came to class.','Neither',['Either','Both','Not'],'Correlative pair: neither…nor.','I'],
+['___ {N} or Sita will win the prize.','Either',['Neither','Both','Whether'],'Correlative pair: either…or.','I'],
+['___ {N} and Ravi are good singers.','Both',['Either','Neither','Not only'],'Correlative pair: both…and.','B'],
+['{N} is not only clever ___ hardworking.','but also',['and also','as well','but'],'Correlative pair: not only…but also.','I'],
+['No sooner had {N} arrived ___ it started raining.','than',['when','then','that'],'"No sooner" pairs with "than".','A'],
+['Hardly had {N} sat down ___ the bell rang.','when',['than','then','that'],'"Hardly" pairs with "when".','A'],
+['{N} was so tired ___ he fell asleep.','that',['than','as','so'],'so…that shows result.','I'],
+['Walk carefully ___ you should fall.','lest',['unless','until','if'],'"lest" = for fear that; takes "should".','A'],
+['Take an umbrella ___ it rains.','in case',['unless','so','although'],'"in case" = as a precaution.','I'],
+['{N} read a book ___ waiting for the train.','while',['because','unless','so'],'"while" = during the time.','B'],
+['{N} likes summer, ___ his sister prefers winter.','whereas',['because','so','unless'],'"whereas" contrasts two facts.','I'],
+['I don\'t know ___ {N} will come or not.','whether',['if','that','unless'],'"whether…or not" is correct.','I'],
+['{N} said ___ he was busy.','that',['than','what','because'],'"that" introduces a reported clause.','B'],
+['Sit ___ you like, {N}.','wherever',['whenever','whatever','unless'],'"wherever" = any place.','I'],
+['___ {N} finished homework, he went out to play.','After',['Unless','Although','Lest'],'"After" shows time sequence.','B'],
+['{N} brushed his teeth ___ going to bed.','before',['unless','because','so'],'"before" = earlier than.','B'],
+['{N} has lived here ___ 2015.','since',['for','from','until'],'"since" + point of time.','I'],
+['{N} would rather walk ___ take the bus.','than',['then','or','but'],'rather…than shows preference.','I'],
+['{N} is as clever ___ his sister.','as',['than','so','like'],'as…as shows equality.','B'],
+['You may go out ___ you finish your work first.','provided that',['unless','although','lest'],'"provided that" = only if.','A'],
+['The road was wet; ___, {N} drove slowly.','therefore',['however','but','although'],'"therefore" (conjunctive adverb) shows result.','A'],
+['The phone was costly; ___, {N} bought it.','however',['therefore','because','so'],'"however" shows contrast.','A'],
+['{N} stayed home, ___ he was ill.','for',['so','yet','or'],'"for" (FANBOYS) gives reason, formal.','I'],
+['___ {N} works hard, he will succeed.','If',['Unless','Although','Lest'],'"If" introduces a condition.','B'],
+['{N} smiled ___ she heard the news.','when',['unless','than','although'],'"when" = at the time that.','B'],
+['Whether {N} wins ___ loses, he will play fair.','or',['nor','and','but'],'whether…or is a correlative pair.','I'],
+['It was such a good film ___ {N} watched it twice.','that',['as','so','than'],'such…that shows result.','I'],
+['___ {N} is rich, he is not proud.','Though',['Because','If','So'],'"Though" shows contrast.','B'],
+['{N} could not come ___ he was busy.','as',['unless','lest','than'],'"as" can mean because.','I'],
+['Scarcely had {N} left ___ the guests arrived.','when',['than','then','so'],'"Scarcely" pairs with "when".','A'],
+['{N} worked hard ___ he could pass the exam.','so that',['because','unless','though'],'"so that" = purpose.','I'],
+['Hurry up, ___ you will miss the train, {N}.','or',['and','but','so'],'"or" = otherwise (warning).','I'],
+['Study well, ___ you will pass, {N}.','and',['or','but','yet'],'"and" = then (result of command).','I'],
+['{N} kept quiet ___ he knew the answer.','though',['because','so','if'],'Contrast: knew yet quiet.','I'],
+['___ {N} goes, he makes friends.','Wherever',['Unless','Whether','Lest'],'"Wherever" = in every place.','I'],
+['{N} will help you ___ you ask him.','if',['unless','lest','though'],'Condition.','B'],
+['Do not go out ___ it stops raining, {N}.','until',['unless','because','since'],'Time limit: until.','I'],
+];
+const ERR=[
+['Although he was ill, but he attended school.','Although he was ill, he attended school.','Do not use "but" with "although".'],
+['Neither Ram or Shyam came.','Neither Ram nor Shyam came.','neither pairs with nor.'],
+['Either you or he are wrong.','Either you or he is wrong.','Verb agrees with the nearer subject (he → is).'],
+['No sooner did he come when it rained.','No sooner did he come than it rained.','no sooner → than.'],
+['Hardly had I reached than the bus left.','Hardly had I reached when the bus left.','hardly → when.'],
+['Unless you do not work, you will fail.','Unless you work, you will fail.','"unless" is already negative.'],
+['Walk fast lest you will miss the bus.','Walk fast lest you should miss the bus.','lest → should.'],
+['Both Ravi as well as Sita came.','Both Ravi and Sita came.','both pairs with and.'],
+['He is not only kind but intelligent also.','He is not only kind but also intelligent.','not only…but also, parallel order.'],
+['Because he was late, so he was punished.','Because he was late, he was punished.','Do not use "so" with "because".'],
+['She is more taller than her sister.','She is taller than her sister.','No double comparative.'],
+['I doubt that whether he will come.','I doubt whether he will come.','Use one conjunction only.'],
+['Wait here until I do not come.','Wait here until I come.','"until" is already negative in sense.'],
+['Though he is poor, yet he is happy is wrong? No—Though he is poor but he is happy.','Though he is poor, he is happy.','Avoid "but" after "though".'],
+['The reason is because he was ill.','The reason is that he was ill.','"reason…that", not "because".'],
+['Scarcely had we left than it rained.','Scarcely had we left when it rained.','scarcely → when.'],
+['Neither he nor I are going.','Neither he nor I am going.','Agrees with nearer subject "I".'],
+['He ran fastly so that to catch the bus.','He ran fast so that he could catch the bus.','"so that" + clause.'],
+['Not only he is smart but also kind.','He is not only smart but also kind.','Parallel structure.'],
+['Rather than to walk, he took a taxi.','Rather than walk, he took a taxi.','rather than + base verb.'],
+];
+
+/* Build 1000+ MCQ questions */
+const Q=[];
+T.forEach((t,ti)=>NAMES.forEach((n,ni)=>{
+  const n2=NAMES[(ni+5)%NAMES.length];let c=0;
+  const s=t[0].replace(/\{N\}/g,()=>c++?(t[0].includes('his brother')||t[0].includes('Ravi')?n:n2):n);
+  Q.push({id:'q'+ti+'_'+ni,s,a:t[1],o:shuffle([t[1],...t[2]]),e:t[3],l:t[4]});
+}));
+ERR.forEach((e,i)=>Q.push({id:'e'+i,err:1,s:e[0].replace(/^.*?—/,''),a:e[1],o:shuffle([e[1],e[0].replace(/^.*?—/,''),'No change needed']),e:e[2],l:'A'}));
+const qById=Object.fromEntries(Q.map(q=>[q.id,q]));
+
+/* ================== LESSONS ================== */
+const L=[
+['What is a Conjunction?','ಸಂಯೋಜಕ ಎಂದರೇನು?',`A <b>conjunction</b> is a word that <b>joins</b> words, phrases or clauses. <span class="kn">ಪದಗಳು, ಪದಗುಚ್ಛಗಳು ಅಥವಾ ವಾಕ್ಯಾಂಶಗಳನ್ನು ಜೋಡಿಸುವ ಪದವೇ ಸಂಯೋಜಕ.</span><ul><li>Words: bread <span class="hl">and</span> butter</li><li>Phrases: in the house <span class="hl">or</span> in the garden</li><li>Clauses: I came <span class="hl">because</span> you called.</li></ul>`],
+['Three Main Types','ಮೂರು ಮುಖ್ಯ ವಿಧಗಳು',`<table><tr><th>Type</th><th>Function</th><th>Examples</th></tr><tr><td>Coordinating</td><td>Joins equal parts</td><td>for, and, nor, but, or, yet, so</td></tr><tr><td>Subordinating</td><td>Joins a dependent clause to a main clause</td><td>because, although, if, when, unless</td></tr><tr><td>Correlative</td><td>Work in pairs</td><td>either…or, neither…nor, both…and</td></tr></table><p class="kn">ಸಮಾನ ಜೋಡಕ, ಅಧೀನ ಜೋಡಕ, ಜೋಡಿ ಜೋಡಕ</p>`],
+['FANBOYS','FANBOYS ನೆನಪಿನ ಸೂತ್ರ',`<p>The 7 coordinating conjunctions: <b>F</b>or • <b>A</b>nd • <b>N</b>or • <b>B</b>ut • <b>O</b>r • <b>Y</b>et • <b>S</b>o</p><p>Rule: Put a <b>comma before</b> FANBOYS when it joins two independent clauses: <i>It rained<span class="hl">, so</span> we stayed in.</i></p><p class="kn">ಎರಡು ಸ್ವತಂತ್ರ ವಾಕ್ಯಗಳನ್ನು ಜೋಡಿಸುವಾಗ ಅಲ್ಪವಿರಾಮ ಬಳಸಿ.</p>`],
+['Subordinating Conjunctions by Meaning','ಅರ್ಥದ ಪ್ರಕಾರ ಅಧೀನ ಜೋಡಕಗಳು',`<table><tr><th>Meaning</th><th>Conjunctions</th></tr><tr><td>Time</td><td>when, while, before, after, until, since, as soon as</td></tr><tr><td>Reason</td><td>because, since, as</td></tr><tr><td>Condition</td><td>if, unless, provided that, in case</td></tr><tr><td>Contrast</td><td>although, though, even though, whereas, while</td></tr><tr><td>Purpose</td><td>so that, in order that, lest</td></tr><tr><td>Result</td><td>so…that, such…that</td></tr><tr><td>Comparison</td><td>than, as…as</td></tr><tr><td>Place</td><td>where, wherever</td></tr></table>`],
+['Correlative Conjunctions','ಜೋಡಿ ಸಂಯೋಜಕಗಳು',`<p>Always used in pairs and must join <b>parallel</b> (same-type) elements.</p><ul><li>either…or / neither…nor / both…and</li><li>not only…but also / whether…or</li><li>no sooner…than / hardly…when / scarcely…when</li></ul><p>✗ He not only is kind but also smart. ✓ He is not only kind but also smart.</p>`],
+['Clauses & Sentence Types','ವಾಕ್ಯಾಂಶ ಮತ್ತು ವಾಕ್ಯ ಪ್ರಕಾರಗಳು',`<ul><li><b>Simple:</b> one main clause. <i>I play.</i></li><li><b>Compound:</b> two main clauses + coordinating conjunction. <i>I play, and she sings.</i></li><li><b>Complex:</b> main clause + subordinate clause. <i>I play when I am free.</i></li><li><b>Compound-complex:</b> both. <i>I play when I am free, but she studies.</i></li></ul><p class="kn">ಸರಳ, ಸಂಯುಕ್ತ, ಮಿಶ್ರ ವಾಕ್ಯಗಳು</p>`],
+['Conjunction vs Preposition vs Adverb','ಸಂಯೋಜಕ vs ಉಪಸರ್ಗ',`<table><tr><th>Word</th><th>Conjunction (+clause)</th><th>Preposition (+noun)</th></tr><tr><td>before</td><td>Eat before you go.</td><td>Come before noon.</td></tr><tr><td>after</td><td>He left after we ate.</td><td>After lunch, rest.</td></tr><tr><td>since</td><td>Since it rained, we stayed.</td><td>Since Monday.</td></tr><tr><td>because / because of</td><td>because it rained</td><td>because of the rain</td></tr><tr><td>although / despite</td><td>although it rained</td><td>despite the rain</td></tr></table><p><b>Conjunctive adverbs</b> (however, therefore, moreover) need a semicolon: <i>It was late; however, he came.</i></p>`],
+['Subject–Verb Agreement','ಕರ್ತೃ–ಕ್ರಿಯಾಪದ ಹೊಂದಾಣಿಕೆ',`<ul><li><b>and</b> → plural: Ravi and Sita <b>are</b> here.</li><li><b>either/neither…or/nor</b> → verb agrees with nearer subject: Neither the boys nor the teacher <b>is</b> here.</li><li><b>not only…but also</b> → nearer subject: Not only he but also his friends <b>were</b> late.</li><li><b>as well as / along with</b> → first subject: The teacher as well as students <b>is</b> present.</li></ul>`],
+['Common Errors','ಸಾಮಾನ್ಯ ತಪ್ಪುಗಳು',`<ul><li>✗ Although…but → ✓ Although… (no but)</li><li>✗ Because…so → ✓ Because… (no so)</li><li>✗ Unless…not → ✓ Unless… (already negative)</li><li>✗ lest…will → ✓ lest…should</li><li>✗ No sooner…when → ✓ No sooner…than</li><li>✗ Hardly…than → ✓ Hardly…when</li><li>✗ The reason is because → ✓ The reason is that</li></ul>`],
+['Exam Tips','ಪರೀಕ್ಷಾ ಸಲಹೆಗಳು',`<ol><li>Identify the relation: addition, contrast, reason, result, time, condition.</li><li>Check for pair partners (neither→nor).</li><li>Never use double conjunctions.</li><li>"No sooner/Hardly/Scarcely" at the start cause inversion: <i>Hardly <b>had I</b>…</i></li><li>Check verb agreement with correlatives.</li></ol>`],
+];
+
+/* ================== NAV ================== */
+const S=[['home','🏠 Home'],['learn','📘 Learn'],['bank','📚 Reference'],['flash','🃏 Flashcards'],['practice','✍️ Practice'],['error','🔍 Error Spotting'],['builder','🧩 Builder'],['daily','⭐ Daily'],['revise','🔁 Revision'],['mist','📕 Mistakes'],['sheets','🖨️ Worksheets'],['papers','📝 Papers'],['comp','🏆 Competitive'],['grand','🎓 Grand Test'],['dash','📊 Progress']];
+$('#nav').innerHTML=S.map(s=>`<button data-s="${s[0]}" onclick="go('${s[0]}')">${s[1]}</button>`).join('');
+$('#main').innerHTML=S.map(s=>`<section id="s-${s[0]}" aria-label="${s[1]}"></section>`).join('');
+function go(id){document.querySelectorAll('section').forEach(x=>x.classList.toggle('on',x.id=='s-'+id));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.s==id));(R[id]||(()=>{}))();scrollTo(0,0);location.hash=id}
+
+/* ================== QUIZ ENGINE ================== */
+let QZ={};
+function startQuiz(box,qs,opt={}){
+  QZ[box]={qs,i:0,score:0,ans:[],timed:opt.timed,title:opt.title||'Quiz',key:opt.key,noFb:opt.noFb,start:Date.now()};
+  renderQ(box);
+}
+function renderQ(box){
+  const z=QZ[box],el=document.getElementById(box);
+  if(z.i>=z.qs.length)return finishQuiz(box);
+  const q=z.qs[z.i];
+  el.innerHTML=`<div class="card"><div style="display:flex;justify-content:space-between"><b>${esc(z.title)}</b><span>Q ${z.i+1}/${z.qs.length} • Score ${z.score}</span></div>
+  <div class="bar" style="margin:8px 0"><i style="width:${z.i/z.qs.length*100}%"></i></div>
+  <p style="font-size:1.1rem">${q.err?'Choose the correct sentence:<br><i>'+esc(q.s)+'</i>':esc(q.s).replace('___','<b class="hl">_____</b>')} ${sp(q.s.replace('___','blank'))}</p>
+  ${q.o.map(o=>`<button class="opt" onclick="pick('${box}',this)" data-v="${esc(o)}">${esc(o)}</button>`).join('')}
+  <div class="fbx"></div></div>`;
+}
+function pick(box,btn){
+  const z=QZ[box],q=z.qs[z.i],v=btn.dataset.v,ok=v===q.a,el=document.getElementById(box);
+  el.querySelectorAll('.opt').forEach(b=>{b.disabled=true;if(b.dataset.v===q.a)b.classList.add('ok')});
+  if(!ok)btn.classList.add('bad');
+  z.ans.push({id:q.id,v,ok});if(ok)z.score++;
+  P.att++;if(ok){P.cor++;P.done[q.id]=1;P.mist=P.mist.filter(x=>x!==q.id)}else if(!P.mist.includes(q.id))P.mist.push(q.id);
+  save();
+  const nx=`<button class="btn" onclick="QZ['${box}'].i++;renderQ('${box}')">Next →</button>`;
+  if(z.noFb){z.i++;return setTimeout(()=>renderQ(box),250)}
+  el.querySelector('.fbx').innerHTML=`<div class="fb">${ok?'✅ Correct!':'❌ Correct answer: <b>'+esc(q.a)+'</b>'}<br>💡 ${esc(q.e)}</div>${nx}`;
+}
+function finishQuiz(box){
+  const z=QZ[box],pc=Math.round(z.score/z.qs.length*100),t=Math.round((Date.now()-z.start)/1000);
+  if(z.key){P.best[z.key]=Math.max(P.best[z.key]||0,pc);save()}
+  const wrong=z.ans.filter(a=>!a.ok).map(a=>qById[a.id]);
+  document.getElementById(box).innerHTML=`<div class="card" style="text-align:center"><h3>${esc(z.title)} – Result</h3><div class="stat">${z.score}/${z.qs.length} (${pc}%)</div><p>Time: ${t}s • ${pc>=90?'🌟 Excellent! Master level':pc>=70?'👍 Good work':pc>=50?'🙂 Keep practising':'📖 Revise the lessons and try again'}</p>
+  <button class="btn" onclick="startQuiz('${box}',shuffle(QZ['${box}'].qs),{title:QZ['${box}'].title,key:QZ['${box}'].key,noFb:QZ['${box}'].noFb})">Retry</button></div>
+  ${wrong.length?'<div class="card"><h3>Review</h3>'+wrong.map(q=>`<p>• ${esc(q.s)}<br>✔ <b>${esc(q.a)}</b> — ${esc(q.e)}</p>`).join('')+'</div>':''}`;
+}
+const pickQ=(n,f=()=>true)=>shuffle(Q.filter(f)).slice(0,n);
+
+/* ================== RENDERERS ================== */
+const R={
+home(){const pc=P.att?Math.round(P.cor/P.att*100):0;
+$('#s-home').innerHTML=`<div class="card"><h3>Welcome! <span class="kn">ಸ್ವಾಗತ!</span></h3><p>This is your complete, offline self-learning portal for <b>Conjunctions</b>. Study lessons, practise with <b>${Q.length}+ questions</b>, take tests and track your progress — everything is saved automatically in this browser.</p>
+<div class="grid"><div class="card"><div class="stat">${Object.keys(P.done).length}</div>Questions mastered</div><div class="card"><div class="stat">${pc}%</div>Accuracy</div><div class="card"><div class="stat">${Object.keys(P.lessons).length}/${L.length}</div>Lessons completed</div><div class="card"><div class="stat">${P.streak||0}🔥</div>Daily streak</div></div>
+<button class="btn" onclick="go('learn')">Start Learning</button><button class="btn alt" onclick="go('practice')">Practise</button><button class="btn ghost" onclick="go('grand')">Grand Test</button></div>
+<div class="card"><h3>Learning Path</h3><div class="grid">${['📘 Learn the rules','🧠 Understand with examples','✍️ Practise questions','📝 Test yourself','🔁 Revise mistakes','🎓 Master it'].map(x=>`<div class="chip">${x}</div>`).join('')}</div></div>`},
+learn(){$('#s-learn').innerHTML=L.map((l,i)=>`<div class="card"><h3>${i+1}. ${l[0]} <span class="kn">• ${l[1]}</span></h3>${l[2]}<br><button class="btn ${P.lessons[i]?'ghost':''}" onclick="P.lessons[${i}]=1;save();R.learn()">${P.lessons[i]?'✔ Completed':'Mark as complete'}</button><button class="btn alt" onclick="miniQuiz(${i})">Quick check</button><div id="mq${i}"></div></div>`).join('')},
+bank(){$('#s-bank').innerHTML=`<div class="card"><h3>Conjunction Reference Bank (${BANK.length})</h3><input type="text" id="bs" placeholder="Search conjunction, type or meaning…" oninput="drawBank()"><select id="bt" onchange="drawBank()" style="margin-top:6px"><option value="">All types</option><option>Coordinating</option><option>Subordinating</option><option>Correlative</option><option>Conjunctive adverb</option></select><div id="bl" style="overflow-x:auto;margin-top:10px"></div></div>`;drawBank()},
+flash(){fi=0;fdeck=shuffle(BANK);drawFlash()},
+practice(){$('#s-practice').innerHTML=`<div class="card"><h3>Practice Zone</h3><p>Choose a set. Instant feedback with explanation after every question.</p>
+<button class="btn" onclick="startQuiz('pq',pickQ(10,q=>q.l=='B'),{title:'Beginner',key:'B'})">Beginner (10)</button>
+<button class="btn" onclick="startQuiz('pq',pickQ(15,q=>q.l=='I'),{title:'Intermediate',key:'I'})">Intermediate (15)</button>
+<button class="btn" onclick="startQuiz('pq',pickQ(15,q=>q.l=='A'),{title:'Advanced',key:'A'})">Advanced (15)</button>
+<button class="btn alt" onclick="startQuiz('pq',pickQ(20,q=>/FANBOYS|"(and|but|or|nor|for|yet|so)"/.test(q.e)),{title:'FANBOYS Drill',key:'F'})">FANBOYS</button>
+<button class="btn alt" onclick="startQuiz('pq',pickQ(20,q=>/pair|correlative|…/i.test(q.e)),{title:'Correlative Drill',key:'C'})">Correlatives</button>
+<button class="btn ghost" onclick="cloze()">Cloze Passage</button></div><div id="pq"></div>`},
+error(){$('#s-error').innerHTML=`<div class="card"><h3>Error Spotting & Sentence Correction</h3><p>Find the correct version of each sentence.</p><button class="btn" onclick="startQuiz('eq',shuffle(Q.filter(q=>q.err)),{title:'Error Spotting',key:'E'})">Start</button></div><div class="card"><h3>Type the correction</h3><div id="tc"></div></div><div id="eq"></div>`;typeCorr()},
+builder(){$('#s-builder').innerHTML=`<div class="card"><h3>🧩 Sentence Builder</h3><p>Join two sentences with a conjunction.</p><input type="text" id="c1" value="It was raining"><select id="cj" style="margin:6px 0">${BANK.filter(b=>b[1]!='Correlative').map(b=>`<option>${b[0]}</option>`).join('')}</select><input type="text" id="c2" value="we stayed at home"><button class="btn" onclick="build()">Build</button><div id="bo" class="fb"></div></div>
+<div class="card"><h3>🔎 Conjunction Finder</h3><p>Paste any sentence or paragraph to highlight conjunctions.</p><textarea id="ft" rows="3">Although it was late, Ravi and Sita kept studying because the exam was near, so they did not sleep.</textarea><button class="btn" onclick="finder()">Find</button><div id="fo" class="fb"></div></div>
+<div class="card"><h3>🧱 Word Order Puzzle</h3><div id="wp"></div></div>`;puzzle()},
+daily(){const d=new Date().toISOString().slice(0,10);let seed=[...d].reduce((a,c)=>a*31+c.charCodeAt(0)|0,7);const r=()=>(seed=seed*16807%2147483647)/2147483647;const qs=[...Q].sort(()=>r()-.5).slice(0,10);
+$('#s-daily').innerHTML=`<div class="card"><h3>⭐ Daily Challenge – ${d}</h3><p>10 new questions every day. Complete to keep your streak! ${P.daily[d]?'<b>✔ Done today: '+P.daily[d]+'%</b>':''}</p><button class="btn" onclick="dailyGo('${d}')">Start today's challenge</button></div><div id="dq"></div>`;window._dq=qs},
+revise(){const weak=P.mist.length;$('#s-revise').innerHTML=`<div class="card"><h3>🔁 Smart Revision</h3><p>Mixes your mistakes with unattempted questions.</p><button class="btn" onclick="startQuiz('rq',shuffle([...P.mist.slice(0,10).map(i=>qById[i]).filter(Boolean),...pickQ(10,q=>!P.done[q.id])]).slice(0,15),{title:'Smart Revision'})">Start revision (${Math.min(15,weak+10)})</button></div>
+<div class="card"><h3>Quick Revision Notes</h3><ul><li>FANBOYS = for, and, nor, but, or, yet, so</li><li>Although ✗ but • Because ✗ so • Unless ✗ not</li><li>No sooner → than • Hardly/Scarcely → when</li><li>lest → should • reason → that</li><li>either/neither/not only → verb agrees with nearer subject</li></ul></div><div id="rq"></div>`},
+mist(){$('#s-mist').innerHTML=`<div class="card"><h3>📕 Mistake Book (${P.mist.length})</h3>${P.mist.length?`<button class="btn" onclick="startQuiz('mq',shuffle(P.mist.map(i=>qById[i]).filter(Boolean)).slice(0,20),{title:'Mistake Practice'})">Practise mistakes</button><button class="btn ghost" onclick="if(confirm('Clear mistake book?')){P.mist=[];save();R.mist()}">Clear</button>`+P.mist.slice(0,60).map(i=>qById[i]).filter(Boolean).map(q=>`<p>• ${esc(q.s)}<br>✔ <b>${esc(q.a)}</b> — ${esc(q.e)}</p>`).join(''):'<p>No mistakes yet. Great job! 🎉</p>'}</div><div id="mq"></div>`},
+sheets(){$('#s-sheets').innerHTML=`<div class="card"><h3>🖨️ Printable Worksheets</h3><p>Generates a fresh worksheet with answer key every time.</p>${[['Beginner Worksheet','B',20],['Intermediate Worksheet','I',20],['Advanced Worksheet','A',20],['Error Correction Worksheet','E',15]].map(w=>`<button class="btn" onclick="printSheet('${w[0]}','${w[1]}',${w[2]})">${w[0]}</button>`).join('')}<button class="btn alt" onclick="printNotes()">Print Notes</button></div>`},
+papers(){$('#s-papers').innerHTML=`<div class="card"><h3>📝 Practice Papers</h3><p>Each paper: 25 mixed questions, result shown at the end (exam mode).</p>${[1,2,3,4,5,6].map(n=>`<button class="btn ${P.best['P'+n]?'ghost':''}" onclick="startQuiz('ppq',paper(${n}),{title:'Practice Paper ${n}',key:'P${n}',noFb:1})">Paper ${n} ${P.best['P'+n]!=null?'('+P.best['P'+n]+'%)':''}</button>`).join('')}</div><div id="ppq"></div>`},
+comp(){$('#s-comp').innerHTML=`<div class="card"><h3>🏆 Competitive Exam Zone</h3><p>For SSLC, PUC, SSC, Banking, KPSC, FDA/SDA, and other exams. Advanced pairs, inversion, and error detection.</p><button class="btn" onclick="startQuiz('cq',shuffle([...pickQ(15,q=>q.l=='A'),...pickQ(10,q=>q.err)]),{title:'Competitive Set',key:'COMP'})">Start Competitive Set (25)</button></div>
+<div class="card"><h3>Must-know Patterns</h3><table><tr><th>Pattern</th><th>Example</th></tr><tr><td>No sooner + had + S + V3 + than</td><td>No sooner had the bell rung than the students ran out.</td></tr><tr><td>Hardly/Scarcely + had + S + V3 + when</td><td>Hardly had he spoken when everyone laughed.</td></tr><tr><td>lest + S + should + V1</td><td>Work hard lest you should fail.</td></tr><tr><td>Not only + aux + S… but also</td><td>Not only did he sing, but he also danced.</td></tr><tr><td>Such + a/an + adj + noun + that</td><td>It was such a long day that I slept early.</td></tr></table></div><div id="cq"></div>`},
+grand(){$('#s-grand').innerHTML=`<div class="card"><h3>🎓 Grand Test</h3><p>50 questions across all levels. No feedback until the end. Best score: <b>${P.best.GRAND!=null?P.best.GRAND+'%':'—'}</b></p><button class="btn" onclick="startQuiz('gq',[...pickQ(15,q=>q.l=='B'),...pickQ(15,q=>q.l=='I'),...pickQ(12,q=>q.l=='A'&&!q.err),...pickQ(8,q=>q.err)],{title:'Grand Test',key:'GRAND',noFb:1})">Begin Grand Test</button><div id="cert"></div></div><div id="gq"></div>`;
+if(P.best.GRAND>=80)$('#cert').innerHTML=`<div class="fb" style="text-align:center;border:3px double var(--pri)"><b>🏅 Certificate of Mastery</b><br>KS Learning Center certifies mastery of Conjunctions with ${P.best.GRAND}%.</div>`},
+dash(){const pc=P.att?Math.round(P.cor/P.att*100):0;const keys=[['B','Beginner'],['I','Intermediate'],['A','Advanced'],['E','Error Spotting'],['COMP','Competitive'],['GRAND','Grand Test'],...[1,2,3,4,5,6].map(n=>['P'+n,'Paper '+n])];
+$('#s-dash').innerHTML=`<div class="card"><h3>📊 Progress Dashboard</h3><div class="grid"><div class="card"><div class="stat">${P.att}</div>Attempted</div><div class="card"><div class="stat">${P.cor}</div>Correct</div><div class="card"><div class="stat">${pc}%</div>Accuracy</div><div class="card"><div class="stat">${Object.keys(P.done).length}/${Q.length}</div>Mastered</div></div>
+<p>Overall mastery</p><div class="bar"><i style="width:${Object.keys(P.done).length/Q.length*100}%"></i></div>
+<h3 style="margin-top:16px">Best Scores</h3>${keys.map(k=>`<p style="margin:4px 0">${k[1]}: ${P.best[k[0]]!=null?P.best[k[0]]+'%':'—'}</p><div class="bar"><i style="width:${P.best[k[0]]||0}%"></i></div>`).join('')}
+<br><button class="btn ghost" onclick="exportP()">Export progress</button><button class="btn ghost" onclick="if(confirm('Reset ALL progress?')){localStorage.removeItem(LS);location.reload()}">Reset progress</button></div>`},
+};
+
+/* ================== FEATURES ================== */
+function miniQuiz(i){const kw=[['and','but','or'],['because','although','either'],['and','but','so','yet','for','or','nor'],['because','unless','until','so that','whereas'],['either','neither','both','not only','whether'],['and','when','but'],['therefore','however','before','since'],['Either','Neither','Both'],['lest','unless','No sooner','Hardly'],['than','when','that']][i]||[];
+startQuiz('mq'+i,pickQ(5,q=>kw.some(k=>q.a.toLowerCase()==k.toLowerCase())),{title:'Quick check'})}
+function drawBank(){const s=($('#bs').value||'').toLowerCase(),t=$('#bt').value;
+$('#bl').innerHTML=`<table><tr><th>Conjunction</th><th>Type</th><th>Use</th><th class="kn">ಕನ್ನಡ</th><th>Example</th></tr>${BANK.filter(b=>(!t||b[1]==t)&&b.join(' ').toLowerCase().includes(s)).map(b=>`<tr><td><b>${b[0]}</b> ${sp(b[0].replace('…',' '))}</td><td>${b[1]}<br><small>${b[2]}</small></td><td>${b[3]}</td><td class="kn">${b[4]}</td><td>${b[5]} ${sp(b[5])}</td></tr>`).join('')}</table>`}
+let fi=0,fdeck=[],fback=false;
+function drawFlash(){const b=fdeck[fi];$('#s-flash').innerHTML=`<div class="card"><h3>🃏 Flashcards (${fi+1}/${fdeck.length})</h3><div class="card flash" onclick="fback=!fback;drawFlash()" role="button" tabindex="0" aria-label="Flip card">${fback?`<div><b>${b[1]} – ${b[2]}</b></div><div>${b[3]}</div><div class="kn">${b[4]}</div><i style="font-size:1rem">${b[5]}</i>`:`<div style="font-size:2rem;color:var(--pri)">${b[0]}</div><small>(tap to flip)</small>`}</div>
+<button class="btn ghost" onclick="fi=(fi-1+fdeck.length)%fdeck.length;fback=false;drawFlash()">← Prev</button><button class="btn" onclick="say('${b[0].replace('…',' ')}. ${b[5].replace(/'/g,'')}')">🔊 Speak</button><button class="btn alt" onclick="P.flash[fdeck[fi][0]]=1;save();fi=(fi+1)%fdeck.length;fback=false;drawFlash()">I know it ✔</button><button class="btn ghost" onclick="fi=(fi+1)%fdeck.length;fback=false;drawFlash()">Next →</button><button class="btn ghost" onclick="fdeck=shuffle(BANK);fi=0;drawFlash()">Shuffle</button><p>Known: ${Object.keys(P.flash).length}/${BANK.length}</p></div>`}
+function cloze(){const items=[['Ravi wanted to go out, ___ it was raining heavily.','but'],['He took his umbrella ___ he did not want to get wet.','because'],['___ he reached the bus stop, the bus had left.','When'],['He waited ___ the next bus came.','until'],['He was late, ___ his teacher forgave him.','yet'],['He promised to leave early ___ he would never be late again.','so that']];
+$('#pq').innerHTML=`<div class="card"><h3>Cloze Passage</h3><p>Type the missing conjunctions.</p>${items.map((x,i)=>`<p>${i+1}. ${x[0].replace('___',`<input type="text" id="cz${i}" style="width:130px;display:inline-block" aria-label="Blank ${i+1}">`)}</p>`).join('')}<button class="btn" onclick="checkCloze(${JSON.stringify(items.map(x=>x[1])).replace(/"/g,'&quot;')})">Check</button><div id="czr"></div></div>`}
+function checkCloze(a){let s=0;a.forEach((x,i)=>{const el=$('#cz'+i),ok=el.value.trim().toLowerCase()==x.toLowerCase();el.style.borderColor=ok?'var(--ok)':'var(--bad)';if(!ok)el.title='Answer: '+x;s+=ok});P.att+=a.length;P.cor+=s;save();$('#czr').innerHTML=`<div class="fb">Score: ${s}/${a.length}. Answers: ${a.join(', ')}</div>`}
+let tci=0;function typeCorr(){const e=ERR[tci%ERR.length];$('#tc').innerHTML=`<p><i>${esc(e[0].replace(/^.*?—/,''))}</i></p><input type="text" id="tci" placeholder="Type the corrected sentence"><button class="btn" onclick="chkTC()">Check</button><button class="btn ghost" onclick="tci++;typeCorr()">Skip</button><div id="tco"></div>`}
+function chkTC(){const e=ERR[tci%ERR.length],n=s=>s.toLowerCase().replace(/[^a-z ]/g,'').replace(/\s+/g,' ').trim(),ok=n($('#tci').value)==n(e[1]);P.att++;if(ok)P.cor++;save();$('#tco').innerHTML=`<div class="fb">${ok?'✅ Perfect!':'Model answer: <b>'+esc(e[1])+'</b>'}<br>💡 ${esc(e[2])}</div><button class="btn" onclick="tci++;typeCorr()">Next →</button>`}
+function build(){const a=$('#c1').value.trim().replace(/[.]$/,''),c=$('#cj').value,b=$('#c2').value.trim().replace(/[.]$/,''),info=BANK.find(x=>x[0]==c);let s;
+if(info[1]=='Conjunctive adverb')s=`${a}; ${c}, ${b}.`;else if(info[1]=='Coordinating')s=`${a}, ${c} ${b}.`;else s=`${a} ${c} ${b}.`;
+const alt=info[1]=='Subordinating'?`<br>Alternative: ${c[0].toUpperCase()+c.slice(1)} ${b}, ${a[0].toLowerCase()+a.slice(1)}.`:'';
+$('#bo').innerHTML=`<b>${esc(s)}</b> ${sp(s)}${esc(alt)}<br><small>${info[1]} • ${info[2]} • ${info[3]} <span class="kn">(${info[4]})</span></small>`}
+function finder(){const words=BANK.map(b=>b[0]).filter(w=>!w.includes('…')).sort((a,b)=>b.length-a.length);let t=esc($('#ft').value),found=[];
+words.forEach(w=>{const re=new RegExp('\\b('+w+')\\b(?![^<]*>)','gi');t=t.replace(re,m=>{found.push(w);return`<span class="hl">${m}</span>`})});
+$('#fo').innerHTML=t+`<br><small>Found: ${[...new Set(found)].join(', ')||'none'}</small>`}
+const PZ=['I stayed home because I was ill','She is poor but she is honest','Neither Ravi nor Sita came today','Take an umbrella in case it rains','He ran fast so that he could win','Call me as soon as you arrive'];let pzi=0,pzSel=[];
+function puzzle(){const s=PZ[pzi%PZ.length];pzSel=[];const w=shuffle(s.split(' '));$('#wp').innerHTML=`<p>Arrange the words:</p><div id="pw">${w.map((x,i)=>`<span class="chip" onclick="pzAdd(this)">${x}</span>`).join('')}</div><p id="pa" class="fb">&nbsp;</p><button class="btn" onclick="pzChk()">Check</button><button class="btn ghost" onclick="puzzle()">Reset</button><button class="btn ghost" onclick="pzi++;puzzle()">Next</button><div id="pr"></div>`}
+function pzAdd(el){pzSel.push(el.textContent);el.remove();$('#pa').textContent=pzSel.join(' ')}
+function pzChk(){const ok=pzSel.join(' ')==PZ[pzi%PZ.length];$('#pr').innerHTML=`<div class="fb">${ok?'✅ Correct!':'❌ Answer: '+PZ[pzi%PZ.length]}</div>`}
+function dailyGo(d){startQuiz('dq',window._dq,{title:'Daily Challenge'});const orig=finishQuiz;window.finishQuiz=function(box){orig(box);if(box=='dq'){const z=QZ.dq,pc=Math.round(z.score/z.qs.length*100);if(!P.daily[d]){const y=new Date(Date.now()-864e5).toISOString().slice(0,10);P.streak=P.last==y?(P.streak||0)+1:1;P.last=d}P.daily[d]=Math.max(P.daily[d]||0,pc);save()}window.finishQuiz=orig}}
+function paper(n){let seed=n*9973;const r=()=>(seed=seed*16807%2147483647)/2147483647;return[...Q].sort(()=>r()-.5).slice(0,25)}
+function printSheet(title,lv,n){const qs=lv=='E'?shuffle(Q.filter(q=>q.err)).slice(0,n):pickQ(n,q=>q.l==lv&&!q.err);
+$('#printArea').innerHTML=`<h2>KS LEARNING CENTER<br><small>Conjunction – ${title}</small></h2><p>Name: ____________________ Date: __________ Score: ____/${n}</p>${qs.map((q,i)=>`<div class="pq">${i+1}. ${lv=='E'?'Correct the sentence: '+esc(q.s)+'<br>_______________________________________':esc(q.s).replace('___','________')+'<br>&nbsp;&nbsp;('+q.o.map((o,j)=>'abcd'[j]+') '+esc(o)).join('&nbsp;&nbsp;')+')'}</div>`).join('')}<div style="page-break-before:always"><h3>Answer Key</h3>${qs.map((q,i)=>`${i+1}. ${esc(q.a)}`).join('<br>')}</div>`;window.print()}
+function printNotes(){$('#printArea').innerHTML=`<h2>KS LEARNING CENTER<br><small>Conjunction – Complete Notes</small></h2>`+L.map((l,i)=>`<h3>${i+1}. ${l[0]}</h3>${l[2]}`).join('');window.print()}
+function exportP(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(P)],{type:'application/json'}));a.download='ks_conjunction_progress.json';a.click()}
+function toggleDark(){P.dark=!P.dark;document.body.classList.toggle('dark',P.dark);save()}
+function toggleKn(){P.kn=!P.kn;document.body.classList.toggle('nokn',!P.kn);save()}
+document.body.classList.toggle('dark',!!P.dark);document.body.classList.toggle('nokn',P.kn===false);
+go((location.hash||'#home').slice(1)in R?(location.hash||'#home').slice(1):'home');
+</script>
+</body>
+</html>
